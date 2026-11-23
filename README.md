@@ -53,6 +53,7 @@ Company names, job titles, dates, education, and certifications are copied from 
 app/api/resume/parse      upload → text extraction (PDF/DOCX/TXT)
 app/api/resume/generate   streaming optimization workflow
 app/api/documents/[id]    PDF / ZIP downloads (random UUID, expiring)
+app/api/health            liveness check (request-time, no-store): {status, ai, uptimeSeconds, timestamp}
 components/resume/        UI
 lib/prompts/              all prompts, separate from logic
 lib/schemas.ts            zod schemas for every AI response
@@ -61,6 +62,10 @@ services/resume/          parser, analyzer, optimizer, two-page layout fitter, b
 services/pdf/             resume + cover letter PDF templates, PDF measurement
 services/documents/       in-memory expiring document store
 ```
+
+### Server startup
+
+On a visitor's first load in a browser session, a modal ("Starting the server… about 1 minute") covers the page and polls `GET /api/health` every 3 seconds until it responds, which handles hosts that sleep idle servers. After a success it is skipped for the rest of the session. After 90 seconds it offers a manual retry and keeps polling.
 
 ### Privacy
 

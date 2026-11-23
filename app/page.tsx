@@ -1,8 +1,10 @@
 import { ResumeOptimizer } from "@/components/resume/ResumeOptimizer";
+import { ServerStartupModal } from "@/components/ServerStartupModal";
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
+      <ServerStartupModal />
       <header className="border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-4 sm:px-6">
           <span className="flex size-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
